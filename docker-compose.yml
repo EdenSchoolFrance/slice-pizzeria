@@ -1,0 +1,8 @@
+services:
+  api:
+    build: .
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/api
+
