@@ -2,6 +2,9 @@
 
 REST API built with NestJS - inspired by Slice Life Pizzeria
 
+## Source
+
+- [Slice Life Pizzeria](https://github.com/tdimnet/slice-life-pizzeria)
 
 ## Data
 

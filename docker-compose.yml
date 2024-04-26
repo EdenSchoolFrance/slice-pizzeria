@@ -1,6 +1,9 @@
 services:
   api:
     build: .
+    depends_on:
+      - db
+      - adminer
     environment:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true 
@@ -11,4 +14,18 @@ services:
     tty: true
     volumes:
       - ./:/api
+
+  db:
+    image: postgres
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: toto90
+      POSTGRES_DB: slice-pizzeria
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
 
