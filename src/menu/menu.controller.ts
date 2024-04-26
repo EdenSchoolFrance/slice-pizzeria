@@ -1,16 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
 
-import {
-    PIZZE,
-    Pizza
-} from './menu.data'
+import { PIZZE, Pizza } from './menu.data';
 
 @Controller('menu')
 export class MenuController {
-    constructor() {}
+  constructor() {}
 
-    @Get()
-    getMenu(): Pizza[] {
-        return PIZZE
-    }
+  @Get()
+  getMenu(): Pizza[] {
+    return PIZZE;
+  }
 }
