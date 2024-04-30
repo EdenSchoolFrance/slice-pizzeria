@@ -9,10 +9,6 @@ import { MenuController } from './menu/menu.controller';
 
 const myDBConfig = dbConfig()
 
-console.log("=====")
-console.log(myDBConfig)
-console.log("=====")
-
 
 @Module({
   imports: [

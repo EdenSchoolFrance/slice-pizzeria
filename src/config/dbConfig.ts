@@ -8,20 +8,15 @@ type DBConfig = {
 
 function getConfig() {
     const config: DBConfig = {
-        host: process.env.HOST,
-        port: 5432,
-        username: 'admin',
-        password: 'toto90',
-        database: 'slice-pizzeria'
+        host: process.env.DB_HOST,
+        port: Number(process.env.DB_PORT),
+        username: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DATABASE
     }
 
     Object.keys(config).forEach(obj => {
-        if (!obj) {
-
-            console.log("++++")
-            console.log("++++")
-            console.log("++++")
-
+        if (!config[obj]) {
             throw new Error(`Invalid DB Config: ${obj} is missing`)
         }
     })
