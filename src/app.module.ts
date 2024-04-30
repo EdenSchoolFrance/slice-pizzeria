@@ -2,9 +2,13 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm'
 
 import dbConfig from './config/dbConfig'
+
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { MenuController } from './menu/menu.controller';
+
+import { AppService } from './app.service';
+
+import { Menu } from './menu/menu.entity'
 
 
 const myDBConfig = dbConfig()
@@ -18,7 +22,11 @@ const myDBConfig = dbConfig()
       port: myDBConfig.port,
       username: myDBConfig.username,
       password: myDBConfig.password,
-      database: myDBConfig.database
+      database: myDBConfig.database,
+      entities: [
+        Menu
+      ],
+      synchronize: true
     })
   ],
   controllers: [AppController, MenuController],
