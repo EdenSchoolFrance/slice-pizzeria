@@ -2,15 +2,15 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 export class Menu {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn("uuid")
     id: number
 
     @Column()
     name: string
 
     @Column()
-    descripion: string
+    description: string
 
-    @Column()
+    @Column("decimal", { precision: 5, scale: 2 })
     price: string
 }

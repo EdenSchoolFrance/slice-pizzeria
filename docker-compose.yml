@@ -25,8 +25,6 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: toto90
       POSTGRES_DB: slice-pizzeria
-    volumes:
-      - ./config/data.sql:/docker-entrypoint-initdb.d/data.sql
 
   adminer:
     image: adminer
