@@ -1,11 +1,16 @@
 import { Controller, Get } from '@nestjs/common';
+import { MenuService } from "./menu.service"
+import { Menu } from "./menu.entity"
+
 
 @Controller('menu')
 export class MenuController {
-  constructor() {}
+  constructor(
+    private readonly menuService: MenuService
+  ) {}
 
   @Get()
-  getMenu(): string {
-    return 'Hello';
+  async getMenu(): Promise<Menu[]> {
+    return this.menuService.findAll()
   }
 }
