@@ -9,6 +9,7 @@ import { MenuController } from './menu/menu.controller';
 import { AppService } from './app.service';
 
 import { Menu } from './menu/menu.entity'
+import { MenuService } from './menu/menu.service';
 
 
 const myDBConfig = dbConfig()
@@ -30,6 +31,6 @@ const myDBConfig = dbConfig()
     })
   ],
   controllers: [AppController, MenuController],
-  providers: [AppService],
+  providers: [AppService, MenuService],
 })
 export class AppModule {}
