@@ -1,9 +1,4 @@
-type Pizza = {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-};
+import { Pizza } from '../menu/menu.type';
 
 const PIZZE: Pizza[] = [
   {
@@ -49,4 +44,6 @@ const PIZZE: Pizza[] = [
   },
 ];
 
-export { Pizza, PIZZE };
+export {
+    PIZZE
+}
