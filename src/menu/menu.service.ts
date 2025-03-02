@@ -11,7 +11,7 @@ export class MenuService {
         private menuRepository: Repository<Menu>
     ) {}
 
-    async findAll(): Promise<any> {
+    async findAll(): Promise<Menu[]> {
         return this.menuRepository.find()
     }
 }
