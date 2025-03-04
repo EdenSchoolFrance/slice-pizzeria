@@ -44,6 +44,4 @@ const PIZZE: Pizza[] = [
   },
 ];
 
-export {
-    PIZZE
-}
+export { PIZZE };

@@ -1,19 +1,17 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm'
+import { TypeOrmModule } from '@nestjs/typeorm';
 
-import dbConfig from './config/dbConfig'
+import dbConfig from './config/dbConfig';
 
 import { AppController } from './app.controller';
 import { MenuController } from './menu/menu.controller';
 
 import { AppService } from './app.service';
 
-import { Menu } from './menu/menu.entity'
-import { MenuModule } from "./menu/menu.module"
+import { Menu } from './menu/menu.entity';
+import { MenuModule } from './menu/menu.module';
 
-
-const myDBConfig = dbConfig()
-
+const myDBConfig = dbConfig();
 
 @Module({
   imports: [
@@ -24,12 +22,10 @@ const myDBConfig = dbConfig()
       username: myDBConfig.username,
       password: myDBConfig.password,
       database: myDBConfig.database,
-      entities: [
-        Menu
-      ],
-      synchronize: true
+      entities: [Menu],
+      synchronize: true,
     }),
-    MenuModule
+    MenuModule,
   ],
   controllers: [AppController, MenuController],
   providers: [AppService],

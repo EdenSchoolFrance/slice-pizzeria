@@ -1,10 +1,8 @@
 type Pizza = {
-    id: string
-    name: string
-    description: string
-    price: number
-}
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+};
 
-export {
-    Pizza
-}
+export { Pizza };
