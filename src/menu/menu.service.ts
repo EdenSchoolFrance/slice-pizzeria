@@ -15,4 +15,10 @@ export class MenuService {
     async findAll(): Promise<Menu[]> {
         return this.menuRepository.find()
     }
+
+    async findOne(id: number): Promise<Menu> {
+        return this.menuRepository.findOneBy({
+            id: id
+        })
+    }
 }
