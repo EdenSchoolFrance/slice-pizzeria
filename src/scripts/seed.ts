@@ -1,21 +1,16 @@
-import { DataSource } from 'typeorm';
-
 import { Menu } from '../menu/menu.entity';
 import { PIZZE } from '../data/pizzaData';
-import dbConfig from '../config/dbConfig';
 
-const config = dbConfig();
+import { Category } from "../category/category.entity"
+import { CATEGORIES } from "../data/categoriesData"
 
-const dataSource = new DataSource({
-  type: 'postgres',
-  host: config.host,
-  port: config.port,
-  username: config.username,
-  password: config.password,
-  database: config.database,
-  entities: [Menu],
-  synchronize: true,
-});
+import dataSource from "../data/createDataSource"
+
+
+async function seedCategories() {}
+
+async function seedPizza() {}
+
 
 async function seedDatabase() {
   await dataSource.initialize();
