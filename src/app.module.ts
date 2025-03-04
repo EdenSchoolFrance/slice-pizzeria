@@ -4,14 +4,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import dbConfig from './config/dbConfig';
 
 import { AppController } from './app.controller';
-import { MenuController } from './menu/menu.controller';
-
 import { AppService } from './app.service';
 
 import { Menu } from './menu/menu.entity';
+import { MenuController } from './menu/menu.controller';
 import { MenuModule } from './menu/menu.module';
+
+import { Category } from "./category/category.entity"
+import { CategoryModule } from './category/category.module';
 import { CategoryController } from './category/category.controller';
-import { CategoryService } from './category/category.service';
+
 
 const myDBConfig = dbConfig();
 
@@ -24,12 +26,16 @@ const myDBConfig = dbConfig();
       username: myDBConfig.username,
       password: myDBConfig.password,
       database: myDBConfig.database,
-      entities: [Menu],
+      entities: [
+        Category,
+        Menu
+      ],
       synchronize: true,
     }),
     MenuModule,
+    CategoryModule,
   ],
   controllers: [AppController, MenuController, CategoryController],
-  providers: [AppService, CategoryService],
+  providers: [AppService],
 })
 export class AppModule {}
