@@ -10,10 +10,9 @@ import { Menu } from './menu/menu.entity';
 import { MenuController } from './menu/menu.controller';
 import { MenuModule } from './menu/menu.module';
 
-import { Category } from "./category/category.entity"
+import { Category } from './category/category.entity';
 import { CategoryModule } from './category/category.module';
 import { CategoryController } from './category/category.controller';
-
 
 const myDBConfig = dbConfig();
 
@@ -26,10 +25,7 @@ const myDBConfig = dbConfig();
       username: myDBConfig.username,
       password: myDBConfig.password,
       database: myDBConfig.database,
-      entities: [
-        Category,
-        Menu
-      ],
+      entities: [Category, Menu],
       synchronize: true,
     }),
     MenuModule,
