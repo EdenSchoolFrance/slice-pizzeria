@@ -12,12 +12,15 @@ export class MenuService {
   ) {}
 
   async findAll(): Promise<Menu[]> {
-    return this.menuRepository.find();
+    return this.menuRepository.find({
+      relations: ['category']
+    });
   }
 
   async findOne(id: string): Promise<Menu> {
-    return this.menuRepository.findOneBy({
-      id: id,
+    return this.menuRepository.findOne({
+      where: { id },
+      relations: ['category']
     });
   }
 }
