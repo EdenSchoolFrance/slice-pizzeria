@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+
+import { Category } from "../category/category.entity"
 
 @Entity()
 export class Menu {
@@ -13,4 +15,7 @@ export class Menu {
 
   @Column('decimal', { precision: 5, scale: 2 })
   price: number;
+
+  @ManyToOne(() => Category, category => category.menus)
+  category: Category
 }

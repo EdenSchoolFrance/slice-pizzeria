@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+
+import { Menu } from "../menu/menu.entity"
 
 @Entity()
 export class Category {
@@ -10,4 +12,7 @@ export class Category {
 
   @Column()
   description: string;
+
+  @OneToMany(() => Menu, menu => menu.category)
+  menus: Menu[]
 }
