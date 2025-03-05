@@ -33,6 +33,7 @@ async function seedCategories() {
 
 async function seedPizza() {
   const menuRepository = dataSource.getRepository(Menu);
+  const categoryRepository = dataSource.getRepository(Category)
 
   const count = await menuRepository.count();
 
@@ -45,11 +46,16 @@ async function seedPizza() {
 
   console.log('Starting to seed pizza in the database...');
 
+  const pizzaCategory = await categoryRepository.findOneBy({
+    name: 'pizza'
+  })
+
   const pizzeToInsert = PIZZE.map((pizza) =>
     menuRepository.create({
       name: pizza.name,
       description: pizza.description,
       price: pizza.price,
+      category: pizzaCategory
     }),
   );
   await menuRepository.save(pizzeToInsert);
