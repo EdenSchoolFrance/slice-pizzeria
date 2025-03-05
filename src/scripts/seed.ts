@@ -4,31 +4,45 @@ import { PIZZE } from '../data/pizzaData';
 import { Category } from "../category/category.entity"
 import { CATEGORIES } from "../data/categoriesData"
 
-import dataSource from "../data/createDataSource"
+import dataSource from "../config/createDataSource"
 
 
-async function seedCategories() {}
+async function seedCategories() {
+  const categoryRepository = dataSource.getRepository(Category)
 
-async function seedPizza() {}
+  const count = await categoryRepository.count()
 
+  if (count > 0) {
+    console.log('Categories are already there in the database')
+    await dataSource.destroy()
 
-async function seedDatabase() {
-  await dataSource.initialize();
+    return
+  }
 
-  console.log('Database connexion works!');
+  console.log('Starting to seed categories in the database...')
 
+  const categoriesToInsert = CATEGORIES.map(category => categoryRepository.create({
+    name: category.name,
+    description: category.description
+  }))
+  await categoryRepository.save(categoriesToInsert)
+
+  console.log("Successfully inserted categories.")
+}
+
+async function seedPizza() {
   const menuRepository = dataSource.getRepository(Menu);
 
   const count = await menuRepository.count();
 
   if (count > 0) {
-    console.log('There are already data in the database.');
+    console.log('Pizza are already there in the database');
     await dataSource.destroy();
 
     return;
   }
 
-  console.log('Starting seeding data...');
+  console.log('Starting to seed pizza in the database...');
 
   const pizzeToInsert = PIZZE.map((pizza) =>
     menuRepository.create({
@@ -40,7 +54,17 @@ async function seedDatabase() {
   await menuRepository.save(pizzeToInsert);
 
   console.log('Successfuly inserting 🍕');
+}
 
+
+async function seedDatabase() {
+  await dataSource.initialize();
+  console.log('Database connexion works!');
+
+  await seedCategories()
+  await seedPizza()
+
+  console.log("Successfully inserted all data. Good bye!")
   await dataSource.destroy();
 }
 
