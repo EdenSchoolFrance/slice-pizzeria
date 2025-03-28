@@ -12,12 +12,15 @@ export class ProductsService {
     ) {}
 
     async findAll(): Promise<Product[]> {
-        return this.productRepository.find()
+        return this.productRepository.find({
+            relations: ["category"]
+        })
     }
 
     async findOne(id: string): Promise<Product> {
         return this.productRepository.findOne({
-            where: { id }
+            where: { id },
+            relations: ["category"]
         })
     }
 }

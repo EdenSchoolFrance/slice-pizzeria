@@ -1,4 +1,5 @@
-import { CATEGORIES, PRODUCTS } from '../data/productsData';
+import { CATEGORIES } from '../data/categoriesData';
+import { PRODUCTS } from '../data/productsData';
 import { Product } from '../products/products.entity';
 import { Category } from "../categories/categories.entity"
 
@@ -32,6 +33,7 @@ async function seedCategories() {
 
 async function seedProducts() {
   const productsRepository = dataSource.getRepository(Product);
+  const categoriesRespository = dataSource.getRepository(Category)
 
   const productsCount = await productsRepository.count();
 
@@ -44,12 +46,17 @@ async function seedProducts() {
 
   console.log('Starting to seed products inside the database...');
 
+  const pizzaCategory = await categoriesRespository.findOneBy({
+    name: "pizza"
+  })
+
   const productsToInsert = PRODUCTS.map((product) =>
     productsRepository.create({
       name: product.name,
       description: product.description,
       price: product.price,
       image: product.image,
+      category: pizzaCategory
     }),
   );
   await productsRepository.save(productsToInsert);

@@ -13,7 +13,6 @@ import { ProductsController } from './products/products.controller';
 import { ProductsModule } from './products/products.module';
 
 import { CategoriesController } from './categories/categories.controller';
-import { CategoriesService } from './categories/categories.service';
 import { CategoriesModule } from './categories/categories.module';
 
 import { OrdersController } from './orders/orders.controller';
@@ -39,6 +38,6 @@ const myDBConfig = dbConfig();
     OrdersModule,
   ],
   controllers: [AppController, ProductsController, CategoriesController, OrdersController],
-  providers: [AppService, OrdersService],
+  providers: [AppService],
 })
 export class AppModule {}

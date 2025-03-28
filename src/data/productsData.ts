@@ -1,15 +1,6 @@
 import { Product } from '../products/products.type';
-import { Category } from '../categories/categories.type';
 
-const CATEGORIES: Category[] = [
-  {
-    id: 'c8755d47-4595-4768-9b0a-4cdc2fa92dd9',
-    name: 'pizza',
-    description: 'High qualities Pizza with organic ingredients and good vibes.',
-  },
-];
-
-const PRODUCTS: Product[] = [
+export const PRODUCTS: Product[] = [
   {
     id: '655d-462a-95d2',
     name: 'The Godfather Pizza',
@@ -58,5 +49,3 @@ const PRODUCTS: Product[] = [
     image: 'https://cdn.dummyjson.com/recipe-images/1.webp',
   },
 ];
-
-export { CATEGORIES, PRODUCTS };
