@@ -13,6 +13,8 @@ import { MenuModule } from './menu/menu.module';
 import { Category } from './category/category.entity';
 import { CategoryModule } from './category/category.module';
 import { CategoryController } from './category/category.controller';
+import { ProductsController } from './products/products.controller';
+import { ProductsModule } from './products/products.module';
 
 const myDBConfig = dbConfig();
 
@@ -30,8 +32,9 @@ const myDBConfig = dbConfig();
     }),
     MenuModule,
     CategoryModule,
+    ProductsModule,
   ],
-  controllers: [AppController, MenuController, CategoryController],
+  controllers: [AppController, MenuController, CategoryController, ProductsController],
   providers: [AppService],
 })
 export class AppModule {}
