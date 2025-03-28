@@ -15,6 +15,12 @@ import { CategoryModule } from './category/category.module';
 import { CategoryController } from './category/category.controller';
 import { ProductsController } from './products/products.controller';
 import { ProductsModule } from './products/products.module';
+import { CategoriesController } from './categories/categories.controller';
+import { OrdersController } from './orders/orders.controller';
+import { CategoriesService } from './categories/categories.service';
+import { CategoriesModule } from './categories/categories.module';
+import { OrdersService } from './orders/orders.service';
+import { OrdersModule } from './orders/orders.module';
 
 const myDBConfig = dbConfig();
 
@@ -33,8 +39,10 @@ const myDBConfig = dbConfig();
     MenuModule,
     CategoryModule,
     ProductsModule,
+    CategoriesModule,
+    OrdersModule,
   ],
-  controllers: [AppController, MenuController, CategoryController, ProductsController],
-  providers: [AppService],
+  controllers: [AppController, MenuController, CategoryController, ProductsController, CategoriesController, OrdersController],
+  providers: [AppService, CategoriesService, OrdersService],
 })
 export class AppModule {}

@@ -13,8 +13,8 @@ export class ProductsController {
         return this.productsService.findAll()
     }
 
-    @Get("id")
+    @Get(":id")
     getProductById(@Param("id") id: string): string {
-        return "foo"
+        return this.productsService.findOne(id)
     }
 }

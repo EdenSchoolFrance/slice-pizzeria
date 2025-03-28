@@ -12,7 +12,7 @@ export class CategoryController {
     return this.categoryService.findAll();
   }
 
-  @Get('id')
+  @Get(':id')
   async getCategory(@Param('id') id: string): Promise<Category> {
     return this.categoryService.findOne(id);
   }
