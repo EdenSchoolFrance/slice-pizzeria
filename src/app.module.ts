@@ -6,6 +6,10 @@ import dbConfig from './config/dbConfig';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+
+import { Product } from "./products/products.entity"
+
+
 import { Menu } from './menu/menu.entity';
 import { MenuController } from './menu/menu.controller';
 import { MenuModule } from './menu/menu.module';
@@ -33,7 +37,7 @@ const myDBConfig = dbConfig();
       username: myDBConfig.username,
       password: myDBConfig.password,
       database: myDBConfig.database,
-      entities: [Category, Menu],
+      entities: [Category, Menu, Product],
       synchronize: true,
     }),
     MenuModule,

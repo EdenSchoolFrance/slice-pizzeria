@@ -11,11 +11,13 @@ export class ProductsService {
         private readonly productRepository: Repository<Product>
     ) {}
 
-    findAll(): string {
-        return "Get all products"
+    async findAll(): Promise<Product[]> {
+        return this.productRepository.find()
     }
 
-    findOne(id: string): string {
-        return `Get One product: ${id}`
+    async findOne(id: string): Promise<Product> {
+        return this.productRepository.findOne({
+            where: { id }
+        })
     }
 }
