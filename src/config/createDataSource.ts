@@ -1,8 +1,10 @@
 import { DataSource } from 'typeorm';
 
 import getDbConfig from '../config/dbConfig';
-import { Menu } from '../menu/menu.entity';
-import { Category } from '../category/category.entity';
+
+import { Product } from "../products/products.entity"
+import { Category } from "../categories/categories.entity"
+
 
 const dbConfig = getDbConfig();
 export default new DataSource({
@@ -12,6 +14,6 @@ export default new DataSource({
   username: dbConfig.username,
   password: dbConfig.password,
   database: dbConfig.database,
-  entities: [Category, Menu],
+  entities: [Category, Product],
   synchronize: true,
 });
