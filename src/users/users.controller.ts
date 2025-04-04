@@ -10,12 +10,10 @@ export class UsersController {
     ) {}
 
     @Post()
-    register(@Body() userData: Partial<User>): string {
+    async register(@Body() userData: Partial<User>): Promise<Omit<User, 'password'>> {
+        const user = await this.usersService.create(userData)
 
-        console.log("=====")
-        console.log(userData)
-        console.log("=====")
-
-        return "Foo"
+        const { password, ...result } = user
+        return result
     }
 }
