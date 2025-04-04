@@ -1,6 +1,7 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 
 import { UsersService } from "./users.service"
+import { User } from "./users.entity"
  
 @Controller('users')
 export class UsersController {
@@ -8,8 +9,13 @@ export class UsersController {
         private readonly usersService: UsersService
     ) {}
 
-    @Get(":email")
-    getUserByEmail(@Param("email") email: string): string {
-        return this.usersService.findByEmail(email)
+    @Post()
+    register(@Body() userData: Partial<User>): string {
+
+        console.log("=====")
+        console.log(userData)
+        console.log("=====")
+
+        return "Foo"
     }
 }
