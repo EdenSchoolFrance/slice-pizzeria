@@ -1,18 +1,22 @@
 import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 
 import { CreateOrderDto } from "./orders.dto"
+import { OrdersService } from "./orders.service"
 
 @Controller('orders')
 export class OrdersController {
+    constructor(
+        private readonly ordersService: OrdersService
+    ) {}
 
     @Get()
     getOrders(): string {
-        return "Hello orders!"
+        return this.ordersService.findAll()
     }
 
     @Get(":id")
     getOrderById(@Param("id") id: string): string {
-        return `Hello orderId ${id}`
+        return this.ordersService.findOne(id)
     }
 
     @Post()
@@ -22,6 +26,6 @@ export class OrdersController {
         console.log(createOrderDto)
         console.log("=========")
 
-        return "Creating new order"
+        return this.ordersService.create()
     }
 }
