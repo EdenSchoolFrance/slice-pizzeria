@@ -6,6 +6,8 @@ import {
     OneToMany
 } from "typeorm"
 
+import { OrderProduct } from "./orderProduct.entity"
+
 
 @Entity()
 export class Order {
@@ -20,4 +22,9 @@ export class Order {
 
     @CreateDateColumn()
     created_at: Date
+
+    @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.order, {
+        cascade: true
+    })
+    products: OrderProduct[]
 }
