@@ -8,6 +8,8 @@ import { AppService } from './app.service';
 
 import { Product } from "./products/products.entity"
 import { Category } from "./categories/categories.entity"
+import { OrderProduct } from "./orders/orderProduct.entity"
+import { Order } from "./orders/orders.entity"
 
 import { ProductsController } from './products/products.controller';
 import { ProductsModule } from './products/products.module';
@@ -30,7 +32,7 @@ const myDBConfig = dbConfig();
       username: myDBConfig.username,
       password: myDBConfig.password,
       database: myDBConfig.database,
-      entities: [Category, Product],
+      entities: [Category, Product, OrderProduct, Order],
       synchronize: true,
     }),
     ProductsModule,
