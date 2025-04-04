@@ -2,6 +2,7 @@ import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 
 import { CreateOrderDto } from "./orders.dto"
 import { OrdersService } from "./orders.service"
+import { Order } from "./orders.entity"
 
 @Controller('orders')
 export class OrdersController {
@@ -10,22 +11,17 @@ export class OrdersController {
     ) {}
 
     @Get()
-    getOrders(): string {
+    async getOrders(): Promise<Order[]> {
         return this.ordersService.findAll()
     }
 
     @Get(":id")
-    getOrderById(@Param("id") id: string): string {
+    async getOrderById(@Param("id") id: string): Promise<Order> {
         return this.ordersService.findOne(id)
     }
 
     @Post()
-    createOrder(@Body() createOrderDto: CreateOrderDto) {
-
-        console.log("=========")
-        console.log(createOrderDto)
-        console.log("=========")
-
-        return this.ordersService.create()
+    async createOrder(@Body() dto: CreateOrderDto): Promise<Order> {
+        return this.ordersService.create(dto)
     }
 }
