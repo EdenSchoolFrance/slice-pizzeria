@@ -1,30 +1,29 @@
 import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
-    CreateDateColumn,
-    OneToMany
-} from "typeorm"
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  OneToMany,
+} from 'typeorm';
 
-import { OrderProduct } from "./orderProduct.entity"
-
+import { OrderProduct } from './orderProduct.entity';
 
 @Entity()
 export class Order {
-    @PrimaryGeneratedColumn("uuid")
-    id: string
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column()
-    username: string
+  @Column()
+  username: string;
 
-    @Column()
-    email: string
+  @Column()
+  email: string;
 
-    @CreateDateColumn()
-    created_at: Date
+  @CreateDateColumn()
+  created_at: Date;
 
-    @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.order, {
-        cascade: true
-    })
-    products: OrderProduct[]
+  @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.order, {
+    cascade: true,
+  })
+  products: OrderProduct[];
 }

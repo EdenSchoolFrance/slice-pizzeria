@@ -2,12 +2,11 @@ import { DataSource } from 'typeorm';
 
 import getDbConfig from '../config/dbConfig';
 
-import { Product } from "../products/products.entity"
-import { Category } from "../categories/categories.entity"
-import { OrderProduct } from "../orders/orderProduct.entity"
-import { Order } from "../orders/orders.entity"
-import { User } from "../users/users.entity"
-
+import { Product } from '../products/products.entity';
+import { Category } from '../categories/categories.entity';
+import { OrderProduct } from '../orders/orderProduct.entity';
+import { Order } from '../orders/orders.entity';
+import { User } from '../users/users.entity';
 
 const dbConfig = getDbConfig();
 export default new DataSource({

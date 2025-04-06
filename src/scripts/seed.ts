@@ -1,15 +1,14 @@
 import { CATEGORIES } from '../data/categoriesData';
 import { PRODUCTS } from '../data/productsData';
 import { Product } from '../products/products.entity';
-import { Category } from "../categories/categories.entity"
+import { Category } from '../categories/categories.entity';
 
 import dataSource from '../config/createDataSource';
 
-
 async function seedCategories() {
-  const categoriesRespository = dataSource.getRepository(Category)
+  const categoriesRespository = dataSource.getRepository(Category);
 
-  const categoriesCount = await categoriesRespository.count()
+  const categoriesCount = await categoriesRespository.count();
 
   if (categoriesCount > 0) {
     console.log('There are already categories in the database');
@@ -18,22 +17,23 @@ async function seedCategories() {
     return;
   }
 
-  console.log("Starting to seed categories inside the database...")
+  console.log('Starting to seed categories inside the database...');
 
-  const categoriesToInsert = CATEGORIES.map(category => categoriesRespository.create({
-    id: category.id,
-    name: category.name,
-    description: category.description
-  }))
-  await categoriesRespository.save(categoriesToInsert)
+  const categoriesToInsert = CATEGORIES.map((category) =>
+    categoriesRespository.create({
+      id: category.id,
+      name: category.name,
+      description: category.description,
+    }),
+  );
+  await categoriesRespository.save(categoriesToInsert);
 
-  console.log("Successfully inserted categories!")
+  console.log('Successfully inserted categories!');
 }
-
 
 async function seedProducts() {
   const productsRepository = dataSource.getRepository(Product);
-  const categoriesRespository = dataSource.getRepository(Category)
+  const categoriesRespository = dataSource.getRepository(Category);
 
   const productsCount = await productsRepository.count();
 
@@ -47,8 +47,8 @@ async function seedProducts() {
   console.log('Starting to seed products inside the database...');
 
   const pizzaCategory = await categoriesRespository.findOneBy({
-    name: "pizza"
-  })
+    name: 'pizza',
+  });
 
   const productsToInsert = PRODUCTS.map((product) =>
     productsRepository.create({
@@ -56,7 +56,7 @@ async function seedProducts() {
       description: product.description,
       price: product.price,
       image: product.image,
-      category: pizzaCategory
+      category: pizzaCategory,
     }),
   );
   await productsRepository.save(productsToInsert);
@@ -68,7 +68,7 @@ async function seedDatabase() {
   await dataSource.initialize();
   console.log('Successfully connected to database');
 
-  await seedCategories()
+  await seedCategories();
   await seedProducts();
 
   console.log('Database has been seeded, bye!');
