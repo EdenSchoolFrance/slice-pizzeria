@@ -23,6 +23,7 @@ import { OrdersModule } from './orders/orders.module';
 import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { AuthController } from "./auth/auth.controller"
 
 const myDBConfig = dbConfig();
 
@@ -44,7 +45,7 @@ const myDBConfig = dbConfig();
     UsersModule,
     AuthModule,
   ],
-  controllers: [AppController, ProductsController, CategoriesController, OrdersController, UsersController],
+  controllers: [AppController, ProductsController, CategoriesController, OrdersController, UsersController, AuthController],
   providers: [AppService],
 })
 export class AppModule {}
