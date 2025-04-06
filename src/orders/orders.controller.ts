@@ -4,6 +4,7 @@ import { AuthGuard } from "@nestjs/passport"
 import { CreateOrderDto } from './orders.dto';
 import { OrdersService } from './orders.service';
 import { Order } from './orders.entity';
+import { CurrentUser } from "../users/current-user.decorator"
 
 @Controller('orders')
 @UseGuards(AuthGuard("jwt"))
@@ -11,8 +12,8 @@ export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
   @Get()
-  async getOrders(): Promise<Order[]> {
-    return this.ordersService.findAll();
+  async getOrders(@CurrentUser() user: any): Promise<Order[]> {
+    return this.ordersService.findAll(user.userId);
   }
 
   @Get(':id')
@@ -21,7 +22,7 @@ export class OrdersController {
   }
 
   @Post()
-  async createOrder(@Body() dto: CreateOrderDto): Promise<Order> {
-    return this.ordersService.create(dto);
+  async createOrder(@Body() dto: CreateOrderDto, @CurrentUser() userPayload: any): Promise<Order> {
+    return this.ordersService.create(dto, userPayload.userId);
   }
 }

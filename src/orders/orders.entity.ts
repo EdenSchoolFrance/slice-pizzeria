@@ -4,9 +4,11 @@ import {
   Column,
   CreateDateColumn,
   OneToMany,
+  ManyToOne
 } from 'typeorm';
 
 import { OrderProduct } from './orderProduct.entity';
+import { User } from "../users/users.entity"
 
 @Entity()
 export class Order {
@@ -26,4 +28,7 @@ export class Order {
     cascade: true,
   })
   products: OrderProduct[];
+
+  @ManyToOne(() => User, { eager: true })
+  user: User
 }

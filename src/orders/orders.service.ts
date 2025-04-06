@@ -6,6 +6,7 @@ import { OrderProduct } from './orderProduct.entity';
 import { Order } from './orders.entity';
 import { Product } from '../products/products.entity';
 import { CreateOrderDto } from './orders.dto';
+import { User } from "../users/users.entity"
 
 @Injectable()
 export class OrdersService {
@@ -18,10 +19,16 @@ export class OrdersService {
 
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
+
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>
   ) {}
 
-  async findAll(): Promise<Order[]> {
+  async findAll(userId: string): Promise<Order[]> {
     return this.orderRepository.find({
+      where: { user: {
+        id: userId
+      }},
       relations: ['products', 'products.product'],
       order: { created_at: 'DESC' },
     });
@@ -34,10 +41,17 @@ export class OrdersService {
     });
   }
 
-  async create(dto: CreateOrderDto): Promise<Order> {
+  async create(dto: CreateOrderDto, userId: string): Promise<Order> {
+    const user = await this.userRepository.findOneBy({ id: userId })
+
+    if (!user) {
+      throw new Error("User not found")
+    }
+
     const order = this.orderRepository.create({
       username: dto.username,
       email: dto.email,
+      user: user
     });
 
     const savedOrder = await this.orderRepository.save(order);
@@ -64,7 +78,7 @@ export class OrdersService {
 
     const completedOrder = await this.orderRepository.findOne({
       where: { id: savedOrder.id },
-      relations: ['products', 'products.product'],
+      relations: ['products', 'products.product', 'user'],
     });
     return completedOrder;
   }
