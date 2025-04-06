@@ -49,8 +49,6 @@ export class OrdersService {
     }
 
     const order = this.orderRepository.create({
-      username: dto.username,
-      email: dto.email,
       user: user
     });
 

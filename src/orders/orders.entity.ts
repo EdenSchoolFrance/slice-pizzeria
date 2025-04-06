@@ -15,12 +15,6 @@ export class Order {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  username: string;
-
-  @Column()
-  email: string;
-
   @CreateDateColumn()
   created_at: Date;
 

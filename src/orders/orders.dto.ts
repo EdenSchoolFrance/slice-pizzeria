@@ -4,7 +4,5 @@ type ProductOrder = {
 };
 
 export class CreateOrderDto {
-  username: string;
-  email: string;
   products: ProductOrder[];
 }
