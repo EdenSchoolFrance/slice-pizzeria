@@ -81,5 +81,10 @@ docker compose up -d --build
 yarn run seed
 
 # or with custom env variables
-DB_HOST=localhost DB_PORT=5432 DB_USERNAME=admin DB_PASSWORD=toto90 DB_DATABASE=slice-pizzeria yarn run seed
+DB_HOST=localhost \
+DB_PORT=5432 \
+DB_USERNAME=admin \
+DB_PASSWORD=toto90 \
+DB_DATABASE=slice-pizzeria \
+yarn run seed
 ```
