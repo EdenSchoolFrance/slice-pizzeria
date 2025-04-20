@@ -1,13 +1,13 @@
 import { Controller, Get, Param, Post, Body, UseGuards } from '@nestjs/common';
-import { AuthGuard } from "@nestjs/passport"
+import { AuthGuard } from '@nestjs/passport';
 
 import { CreateOrderDto } from './orders.dto';
 import { OrdersService } from './orders.service';
 import { Order } from './orders.entity';
-import { CurrentUser } from "../users/current-user.decorator"
+import { CurrentUser } from '../users/current-user.decorator';
 
 @Controller('orders')
-@UseGuards(AuthGuard("jwt"))
+@UseGuards(AuthGuard('jwt'))
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
@@ -22,7 +22,10 @@ export class OrdersController {
   }
 
   @Post()
-  async createOrder(@Body() dto: CreateOrderDto, @CurrentUser() userPayload: any): Promise<Order> {
+  async createOrder(
+    @Body() dto: CreateOrderDto,
+    @CurrentUser() userPayload: any,
+  ): Promise<Order> {
     return this.ordersService.create(dto, userPayload.userId);
   }
 }

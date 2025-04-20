@@ -6,7 +6,7 @@ import { OrderProduct } from './orderProduct.entity';
 import { Order } from './orders.entity';
 import { Product } from '../products/products.entity';
 import { CreateOrderDto } from './orders.dto';
-import { User } from "../users/users.entity"
+import { User } from '../users/users.entity';
 
 @Injectable()
 export class OrdersService {
@@ -21,14 +21,16 @@ export class OrdersService {
     private readonly productRepository: Repository<Product>,
 
     @InjectRepository(User)
-    private readonly userRepository: Repository<User>
+    private readonly userRepository: Repository<User>,
   ) {}
 
   async findAll(userId: string): Promise<Order[]> {
     return this.orderRepository.find({
-      where: { user: {
-        id: userId
-      }},
+      where: {
+        user: {
+          id: userId,
+        },
+      },
       relations: ['products', 'products.product'],
       order: { created_at: 'DESC' },
     });
@@ -42,14 +44,14 @@ export class OrdersService {
   }
 
   async create(dto: CreateOrderDto, userId: string): Promise<Order> {
-    const user = await this.userRepository.findOneBy({ id: userId })
+    const user = await this.userRepository.findOneBy({ id: userId });
 
     if (!user) {
-      throw new Error("User not found")
+      throw new Error('User not found');
     }
 
     const order = this.orderRepository.create({
-      user: user
+      user: user,
     });
 
     const savedOrder = await this.orderRepository.save(order);
