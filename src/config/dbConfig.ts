@@ -8,11 +8,11 @@ type DBConfig = {
 
 function getConfig() {
   const config: DBConfig = {
-    host: process.env.DB_HOST,
-    port: Number(process.env.DB_PORT),
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
+    host: process.env.DB_HOST ?? 'localhost',
+    port: Number(process.env.DB_PORT ?? '5432'),
+    username: process.env.DB_USERNAME ?? 'admin',
+    password: process.env.DB_PASSWORD ?? 'toto90',
+    database: process.env.DB_DATABASE ?? 'slice-pizzeria',
   };
 
   Object.keys(config).forEach((obj) => {

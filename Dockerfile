@@ -1,10 +1,22 @@
-FROM node:20.12
+FROM node:20.12-alpine3.19 AS build
 
-# TODO: to go to dev env
-RUN apt-get update
-RUN apt-get install -y procps
+WORKDIR /usr/src
 
-RUN npm i -g @nestjs/cli
+COPY package.json yarn.lock /usr/src/
 
+RUN yarn install --pure-lockfile
 
-WORKDIR /api
+COPY . .
+
+RUN yarn build
+
+FROM node:20.12-alpine3.19
+
+WORKDIR /app
+
+COPY --from=build /usr/src/node_modules /app/node_modules
+COPY --from=build /usr/src/dist /app
+
+EXPOSE 3000
+
+ENTRYPOINT ["node", "main.js"]
