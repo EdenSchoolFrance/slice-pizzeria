@@ -1,4 +1,3 @@
-
 # 🍕 Slice Pizzeria - Documentation API
 
 Bienvenue ! Cette API vous permet de récupérer des produits, de vous connecter, et de passer des commandes.  
@@ -20,19 +19,36 @@ Authorization: Bearer VOTRE_TOKEN_ICI
 
 ## 📦 Endpoints disponibles
 
-| Méthode | Route            | Description                                | Auth requise |
-|--------:|------------------|--------------------------------------------|--------------|
-| POST    | `/auth/login`    | Connexion utilisateur, retourne un token   | ❌            |
-| POST    | `/users`         | Création d’un utilisateur (inscription)    | ❌            |
-| GET     | `/products`      | Liste des produits disponibles             | ❌            |
-| GET     | `/products/:id`  | Détails d’un produit                       | ❌            |
-| GET     | `/categories`    | Liste des catégories de produits           | ❌            |
-| GET     | `/orders`        | Liste des commandes de l'utilisateur       | ✅            |
-| POST    | `/orders`        | Crée une commande avec plusieurs produits  | ✅            |
+| Méthode | Route           | Description                               | Auth requise |
+| ------: | --------------- | ----------------------------------------- | ------------ |
+|    POST | `/auth/login`   | Connexion utilisateur, retourne un token  | ❌           |
+|    POST | `/users`        | Création d’un utilisateur (inscription)   | ❌           |
+|     GET | `/products`     | Liste des produits disponibles            | ❌           |
+|     GET | `/products/:id` | Détails d’un produit                      | ❌           |
+|     GET | `/categories`   | Liste des catégories de produits          | ❌           |
+|     GET | `/orders`       | Liste des commandes de l'utilisateur      | ✅           |
+|    POST | `/orders`       | Crée une commande avec plusieurs produits | ✅           |
+
+---
+
+## ✅ Exemple de requête : POST `/users`
+
+Exemple du body de la requête `POST` pour inscrire un nouvel utilisateur.
+
+```json
+{
+  "firstName": "toto",
+  "lastName": "tutu",
+  "email": "toto@example.com",
+  "password": "secret123"
+}
+```
 
 ---
 
 ## ✅ Exemple de requête : POST `/auth/login`
+
+Exemple du body de la requête `POST` pour authentifier un utilisateur déjà inscrit.
 
 ```json
 {
@@ -42,6 +58,7 @@ Authorization: Bearer VOTRE_TOKEN_ICI
 ```
 
 Réponse :
+
 ```json
 {
   "access_token": "eyJhbGciOiJIUzI1NiIsInR5..."
@@ -55,9 +72,12 @@ Réponse :
 > ⚠️ Cette route nécessite d'être authentifié.
 
 **Headers :**
-```
-Authorization: Bearer VOTRE_TOKEN_ICI
-Content-Type: application/json
+
+```json
+{
+  "Authorization": "Bearer VOTRE_TOKEN_ICI",
+  "Content-Type": "application/json"
+}
 ```
 
 **Corps de la requête :**
@@ -108,18 +128,18 @@ Content-Type: application/json
 fetch('http://localhost:3000/orders', {
   method: 'POST',
   headers: {
-    'Authorization': 'Bearer VOTRE_TOKEN_ICI',
-    'Content-Type': 'application/json'
+    Authorization: 'Bearer VOTRE_TOKEN_ICI',
+    'Content-Type': 'application/json',
   },
   body: JSON.stringify({
     products: [
-      { uuid: "3d684bbd-227a-45ff-b607-58eab1067598", quantity: 2 },
-      { uuid: "fff85a88-5296-43cd-9618-cacfb3a0324b", quantity: 1 }
-    ]
-  })
+      { uuid: '3d684bbd-227a-45ff-b607-58eab1067598', quantity: 2 },
+      { uuid: 'fff85a88-5296-43cd-9618-cacfb3a0324b', quantity: 1 },
+    ],
+  }),
 })
-.then(res => res.json())
-.then(data => console.log(data));
+  .then((res) => res.json())
+  .then((data) => console.log(data));
 ```
 
 ---
